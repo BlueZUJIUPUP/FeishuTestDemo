@@ -4,7 +4,7 @@
 # @Author : BLUE_JUZIUPUP
 import json
 import requests
-from Api.log import log
+from Api.Log import log
 
 
 class Http_Api:

@@ -2,8 +2,8 @@
 # @File   : feishu
 # @Time   : 2021/8/23 14:55 
 # @Author : BLUE_JUZIUPUP
-from Api.http_api import Http_Api
-from Api.log import log
+from Api.Httpapi import Http_Api
+from Api.Log import log
 
 
 class feishuapi(Http_Api):

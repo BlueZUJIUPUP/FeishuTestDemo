@@ -2,7 +2,7 @@
 # @File   : get_token
 # @Time   : 2021/8/23 11:43 
 # @Author : BLUE_JUZIUPUP
-from Api.http_api import Http_Api
+from Api.Httpapi import Http_Api
 
 
 class Token(Http_Api):
