@@ -2,10 +2,10 @@
 # @File   : get_token
 # @Time   : 2021/8/23 11:43 
 # @Author : BLUE_JUZIUPUP
-from Api.http_requests import Http_requests
+from Api.http_api import Http_Api
 
 
-class Token(Http_requests):
+class Token(Http_Api):
     app_id = 'cli_a1861cddecf85013'
     app_secret = 'dnst9iwMxaa8sz36LakB2gE3aHaYeEaA'
     app_ticket = 1
