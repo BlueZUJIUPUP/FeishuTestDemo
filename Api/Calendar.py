@@ -2,7 +2,7 @@
 # @File   : Calendar
 # @Time   : 2021/8/23 15:48 
 # @Author : BLUE_JUZIUPUP
-from Api.feishu import feishuapi
+from Api.Feishu import feishuapi
 
 
 class Calendar(feishuapi):
