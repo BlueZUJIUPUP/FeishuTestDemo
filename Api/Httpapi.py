@@ -21,7 +21,7 @@ class Http_Api:
         r = requests.request(method, url, **kwargs)
         # todo: 后面换成logging
         log.debug(json.dumps(r.json(), indent=2, ensure_ascii=False))
-        return r
+        return r.json()
 
     def rpc_request(self, kwargs):
         pass
