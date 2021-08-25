@@ -22,7 +22,15 @@ class Calendar(feishuapi):
     def get_token(self):
         return self.token
 
-    def get_Calendar(self, page_size=500, *args):
+    def getCalendar(self, calendar_id):
+        data = {
+            'url': f'https://open.feishu.cn/open-apis/calendar/v4/calendars/{calendar_id}',
+            'method': 'get'
+        }
+        j = self.fs_request(**data)
+        return j
+
+    def getCalendarList(self, page_size=500, *args):
         data = {
             'url': 'https://open.feishu.cn/open-apis/calendar/v4/calendars',
             'method': 'get'
@@ -47,7 +55,7 @@ class Calendar(feishuapi):
         return r
 
     def delete_all(self):
-        for calendar in self.get_Calendar():
+        for calendar in self.getCalendarList():
             self.delete(calendar.calendar_id[0])
 
     def create(self, summary, **kwargs):

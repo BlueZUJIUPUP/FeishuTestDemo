@@ -15,11 +15,32 @@ class TestCalendar:
         self.calendar = Calendar(token)
         # self.calendar.create()
 
+    def setup(self):
+        self.calendar.delete_all()
+
     def teardown_class(self):
         pass
 
-    def test_list_calendar(self):
-        calendars = self.calendar.get_Calendar()
+    def test_getCalendar(self):
+        c_calendar = self.calendar.create(
+            'hogwarts_ck_18_001',
+            color=16711680,
+            description='',
+            permissions='public'
+        )
+        calendar_id = c_calendar['data']['calendar']['calendar_id']
+        g_calendar = self.calendar.getCalendar(calendar_id)
+        assert g_calendar['data']['summary'] == 'hogwarts_ck_18_001'
+
+    # def test_getCalendar01(self):
+    #     self.calendar.getCalendarList()
+    #     calendar_id = 'feishu.cn_iUjqF3PvYMGbPp7sQ3Zzyc@group.calendar.feishu.cn'
+    #     self.calendar.delete(calendar_id)
+    #     self.calendar.getCalendar(calendar_id)
+
+
+    def test_getCalendarlist(self):
+        calendars = self.calendar.getCalendarList()
         assert len(calendars) == 1
 
     @pytest.mark.parametrize('name', ["hogwarts_ck_18_001", "hogwarts_ck_18_002"])
@@ -32,12 +53,20 @@ class TestCalendar:
         )
 
     def test_delete_calendar(self):
-        old_calendars = self.calendar.get_Calendar()
-        calendar_id = old_calendars[1].calendar_id[0]
+        c_calendar = self.calendar.create(
+            'hogwarts_ck_18_001',
+            color=16711680,
+            description='',
+            permissions='public'
+        )
+        calendar_id = c_calendar['data']['calendar']['calendar_id']
+        old_calendars = self.calendar.getCalendarList()
         self.calendar.delete(calendar_id)
-        new_calendars = self.calendar.get_Calendar()
-        assert len(new_calendars) + 1 == len(old_calendars)
+        new_calendars = self.calendar.getCalendarList()
+        print(f"old_calendars{len(old_calendars)},new_calendars{len(new_calendars)}")
+        assert len(old_calendars) - 1 == len(new_calendars)
 
     def test_delete_allcalendar(self):
         self.calendar.delete_all()
-        self.calendar.get_Calendar()
+        self.calendar.getCalendarList()
+
