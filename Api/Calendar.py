@@ -38,13 +38,19 @@ class Calendar(feishuapi):
     def update(self, id, **kwargs):
         pass
 
-    def delete(self, id, **kwargs):
-        pass
+    def delete(self, calendar_id):
+        data = {
+            'url': f'https://open.feishu.cn/open-apis/calendar/v4/calendars/{calendar_id}',
+            'method': 'delete',
+        }
+        r = self.fs_request(**data)
+        return r
 
     def delete_all(self):
-        pass
+        for calendar in self.get_Calendar():
+            self.delete(calendar.calendar_id[0])
 
-    def create(self,summary, **kwargs):
+    def create(self, summary, **kwargs):
         url = 'https://open.feishu.cn/open-apis/calendar/v4/calendars'
 
         kwargs['summary'] = summary
