@@ -22,12 +22,13 @@ class TestCalendar:
         pass
 
     def test_getCalendar(self):
-        c_calendar = self.calendar.create(
-            'hogwarts_ck_18_001',
-            color=16711680,
-            description='',
-            permissions='public'
-        )
+        data = {
+            'summary': 'hogwarts_ck_18_001',
+            'color': '16711680',
+            'description': '',
+            'permissions': 'public'
+        }
+        c_calendar = self.calendar.create(**data)
         calendar_id = c_calendar['data']['calendar']['calendar_id']
         g_calendar = self.calendar.getCalendar(calendar_id)
         assert g_calendar['data']['summary'] == 'hogwarts_ck_18_001'
@@ -38,27 +39,28 @@ class TestCalendar:
     #     self.calendar.delete(calendar_id)
     #     self.calendar.getCalendar(calendar_id)
 
-
     def test_getCalendarlist(self):
         calendars = self.calendar.getCalendarList()
         assert len(calendars) == 1
 
     @pytest.mark.parametrize('name', ["hogwarts_ck_18_001", "hogwarts_ck_18_002"])
     def test_creat_calendar(self, name):
-        c = self.calendar.create(
-            name,
-            color=16711680,
-            description='',
-            permissions='public'
-        )
+        data = {
+            'summary': name,
+            'color': '16711680',
+            'description': '',
+            'permissions': 'public'
+        }
+        self.calendar.create(**data)
 
     def test_delete_calendar(self):
-        c_calendar = self.calendar.create(
-            'hogwarts_ck_18_001',
-            color=16711680,
-            description='',
-            permissions='public'
-        )
+        data = {
+            'summary': 'hogwarts_ck_18_001',
+            'color': '16711680',
+            'description': '',
+            'permissions': 'public'
+        }
+        c_calendar = self.calendar.create(**data)
         calendar_id = c_calendar['data']['calendar']['calendar_id']
         old_calendars = self.calendar.getCalendarList()
         self.calendar.delete(calendar_id)
@@ -70,3 +72,54 @@ class TestCalendar:
         self.calendar.delete_all()
         self.calendar.getCalendarList()
 
+    def test_update(self):
+        data = {
+            'summary': 'hogwarts_ck_18_001',
+            'color': '16711680',
+            'description': '',
+            'permissions': 'public'
+        }
+        c_calendar = self.calendar.create(**data)
+        calendar_id = c_calendar['data']['calendar']['calendar_id']
+        data = {
+            "summary": "test_update",
+            "description": "test_update",
+            "permissions": "private",
+            "color": -1,
+            "summary_alias": "test_update"
+        }
+        self.calendar.update(calendar_id=calendar_id, **data)
+
+    def test_search(self):
+        data = {
+            'summary': 'hogwarts_ck_18_001',
+            'color': '16711680',
+            'description': '',
+            'permissions': 'public'
+        }
+        self.calendar.create(**data)
+        self.calendar.search('hogwarts')
+
+    def test_subscribe(self):
+        data = {
+            'summary': 'hogwarts_ck_18_001',
+            'color': '16711680',
+            'description': '',
+            'permissions': 'public'
+        }
+        c_calendar = self.calendar.create(**data)
+        calendar_id = c_calendar['data']['calendar']['calendar_id']
+        print(calendar_id)
+        self.calendar.subscribe(calendar_id)
+
+    def test_unsubscribe(self):
+        data = {
+            'summary': 'hogwarts_ck_18_001',
+            'color': '16711680',
+            'description': '',
+            'permissions': 'public'
+        }
+        c_calendar = self.calendar.create(**data)
+        calendar_id = c_calendar['data']['calendar']['calendar_id']
+        self.calendar.subscribe(calendar_id)
+        self.calendar.unsubscribe(calendar_id)

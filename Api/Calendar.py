@@ -43,8 +43,16 @@ class Calendar(feishuapi):
             calendar_list.append(Calendar(token=self.token, **data))
         return calendar_list
 
-    def update(self, id, **kwargs):
-        pass
+    def update(self, calendar_id, **kwargs):
+        data = {
+            'url': f'https://open.feishu.cn/open-apis/calendar/v4/calendars/{calendar_id}',
+            'method': 'patch',
+            'json': {
+                **kwargs
+            }
+        }
+        r = self.fs_request(**data)
+        return r
 
     def delete(self, calendar_id):
         data = {
@@ -68,3 +76,34 @@ class Calendar(feishuapi):
             json=kwargs
         )
         return j
+
+    def search(self, query, page_token: str = None, page_size: int = None):
+        data = {
+            'url': 'https://open.feishu.cn/open-apis/calendar/v4/calendars/search',
+            'method': 'post',
+            'params': {
+                'page_token': page_token,
+                'page_size': page_size
+            },
+            'json': {
+                'query': query
+            }
+        }
+        r = self.fs_request(**data)
+
+    def subscribe(self,calendar_id):
+        data = {
+            'url': f'https://open.feishu.cn/open-apis/calendar/v4/calendars/{calendar_id}/subscribe',
+            'method': 'post',
+        }
+        r = self.fs_request(**data)
+        return r
+
+    def unsubscribe(self,calendar_id):
+        data = {
+            'url': f'https://open.feishu.cn/open-apis/calendar/v4/calendars/{calendar_id}/unsubscribe',
+            'method': 'post',
+        }
+        r = self.fs_request(**data)
+        return r
+
