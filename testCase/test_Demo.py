@@ -2,7 +2,8 @@
 # @File   : test_demo
 # @Time   : 2021/8/23 10:50 
 # @Author : BLUE_JUZIUPUP
-
+import os
+import time
 
 import requests
 
@@ -18,29 +19,8 @@ class Testdemo:
     def teardown_class(self):
         pass
 
-    def test_get_app_access_token(self):
-        data = {
-            'url': 'https://open.feishu.cn/open-apis/auth/v3/app_access_token',
-            'method': 'post',
-            'data': {
-                'app_id' : self.app_id,
-                'app_secret': self.app_secret,
-                'app_ticket' : self.app_ticket
-            }
-        }
-        r = requests.request(**data)
-        print(r.text)
-
-    def test_get_tenant_access_token(self):
-        data = {
-            'url': 'https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal',
-            'method': 'post',
-            'json': {
-                'app_id' : self.app_id,
-                'app_secret': self.app_secret
-            }
-        }
-        r = requests.request(**data)
-        print(r.text)
-
-        pass
+    def test_01(self):
+        timestamp = time.time()
+        print(timestamp)
+        print(int(timestamp))
+        print(str(int(time.time())))
