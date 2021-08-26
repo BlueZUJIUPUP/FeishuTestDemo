@@ -117,19 +117,19 @@ class TestEvents:
 
 
 
-    def test_search(self):
-        json = {
-            "summary": 'summary_test01',
-            "description": "description_test01",
-            "need_notification": False,
-            "start_time": {
-                "timestamp": str(int(time.time())),
-            },
-            "end_time": {
-                "timestamp": str(int(time.time()) + 100000),
-            },
-        }
-        # 创建日程，并获取创建日程的id
-        self.Events.create(self.calendar_id, **json)
-        self.Events.search(self.calendar_id, 'summary_test01')
+    # def test_search(self):
+    #     json = {
+    #         "summary": 'summary_test01',
+    #         "description": "description_test01",
+    #         "need_notification": False,
+    #         "start_time": {
+    #             "timestamp": str(int(time.time())),
+    #         },
+    #         "end_time": {
+    #             "timestamp": str(int(time.time()) + 100000),
+    #         },
+    #     }
+    #     # 创建日程，并获取创建日程的id
+    #     self.Events.create(self.calendar_id, **json)
+    #     self.Events.search(self.calendar_id, 'summary_test01')
 
