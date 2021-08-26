@@ -19,9 +19,11 @@ class Http_Api:
     def http_request(self, method, url, **kwargs):
         log.debug(kwargs)
         r = requests.request(method, url, **kwargs)
+        r.json()
         # todo: 后面换成logging
         log.debug(json.dumps(r.json(), indent=2, ensure_ascii=False))
-        return r
+        # log.debug(json.dumps(r.json(), indent=2, ensure_ascii=False))
+        return r.json()
 
     def rpc_request(self, kwargs):
         pass
