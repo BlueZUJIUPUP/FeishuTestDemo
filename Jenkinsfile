@@ -21,14 +21,14 @@ pipeline{
 			}
 		stage("Run Test"){
             steps {
-				dir(env.WORKSPACE+"/feishu-test"){
+				dir(env.WORKSPACE){
 					bat 'python main.py'
 				}
 			}
 		}
 		stage("reports"){
             steps {
-				dir(env.WORKSPACE+"/feishu-test"){
+				dir(env.WORKSPACE){
 					bat "allure includeProperties: false, jdk: '', results: [[path: 'feishu-test/report/result']]"
 				}
 			}
