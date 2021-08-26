@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-# @File   : mian
+# @File   : main
 # @Time   : 2021/8/26 9:24 
 # @Author : BLUE_JUZIUPUP
 import os
-
 import pytest
 
 
