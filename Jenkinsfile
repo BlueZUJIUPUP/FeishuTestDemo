@@ -29,7 +29,7 @@ pipeline{
 		stage("reports"){
             steps {
 				dir(env.WORKSPACE){
-					bat "allure includeProperties: false, jdk: '', results: [[path: '/report/result']]"
+					bat "allure includeProperties: false, jdk: '', results: [[path: 'report/result']]"
 				}
 			}
         }
