@@ -8,14 +8,14 @@ pipeline{
 
 		stage('start') {
 			steps {
-				echo 'Strat Test ~~~~'
+				echo 'Strat Master Test ~~~~'
 				}
 			}
 
         stage("download-code"){
             steps {
 				dir(env.WORKSPACE){
-					checkout([$class: 'GitSCM', branches: [[name: '*/feature']], extensions: [], userRemoteConfigs: [[credentialsId: 'gitee-redmi', url: 'https://gitee.com/blue-juziupup/feishu-test.git']]])
+					checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'gitee-redmi', url: 'https://gitee.com/blue-juziupup/feishu-test.git']]])
 					}
 				}
 			}
