@@ -29,7 +29,7 @@ pipeline{
 		stage("reports"){
             steps {
 				dir(env.WORKSPACE){
-					allure includeProperties: false, jdk: '', results: [[path: 'Feishu/report/result']]
+					allure includeProperties: false, jdk: '', results: [[path: 'report/result']]
 				}
 			}
         }
